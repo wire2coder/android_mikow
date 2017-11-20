@@ -85,25 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<String> words = new ArrayList<String>();
-        words.add("one");
-        words.add("two");
-        words.add("three");
-        words.add("four");
-        words.add("five");
-        words.add("six");
-        words.add("seven");
-        words.add("eight");
-        words.add("nine");
-        words.add("ten");
-
-        // make a LinearLayout
-        LinearLayout rootView1 = (LinearLayout) findViewById(R.id.rootView1);
-        TextView wordView1 = new TextView(this);
-//        wordView.setText(words.get(0));
-        rootView1.addView(wordView1);
-
-
     } // onCreate
 
 //    public void openNumbersList(View view) {
