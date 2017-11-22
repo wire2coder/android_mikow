@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,43 +19,32 @@ public class NumbersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_numbers);
 
-        ArrayList<String> words = new ArrayList<String>();
-        words.add("one");
-        words.add("two");
-        words.add("three");
-        words.add("four");
-        words.add("five");
-        words.add("six");
-        words.add("seven");
-        words.add("eight");
-        words.add("nine");
-        words.add("ten");
-        words.add("eleven");
+//        ArrayList<String> words = new ArrayList<String>();
 
-        // make a LinearLayout
-//        LinearLayout rootView = (LinearLayout) findViewById(R.id.rootView);
-//
-//        for( int i=0; i < words.size(); i++) {
-//            TextView view1 = new TextView(this);
-//            view1.setText(words.get(i));
-//            rootView.addView(view1);
-//        }
+        // Array
+        ArrayList<Word> words = new ArrayList<Word>();
+
+        // make a new word object
+        Word word1 = new Word("one", "lutti");
+        // put word1 object into array words
+        words.add(word1);
+        words.add(new Word("two", "otiiko")) ;
+        words.add(new Word("three", "tolookosu"));
+
 
         // make ArrayAdapter (data type)
-        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
+//        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
+//        ArrayAdapter<Word> itemsAdapter = new ArrayAdapter<Word>(this, R.layout.list_item, words);
 
+        // make a new ArrayAdapter, (context, data source)
+        WordAdapter adapter = new WordAdapter(this, words);
 
         // reference ListView in XML
-//        ListView listView = (ListView) findViewById(R.id.list);
+        ListView listView = (ListView) findViewById(R.id.list);
 
         // put ArrayAdapter inside the XML
-//        listView.setAdapter(itemsAdapter);
+        listView.setAdapter(adapter);
 
-        // get address of the GridView from the XML file
-        GridView gridView = (GridView) findViewById(R.id.gridview);
-
-        // link the gridView to the ArrayAdapter
-        gridView.setAdapter(itemsAdapter);
 
 
     } // onCreate
