@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -43,10 +44,19 @@ public class NumbersActivity extends AppCompatActivity {
 
         // make ArrayAdapter (data type)
         ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
+
+
         // reference ListView in XML
-        ListView listView = (ListView) findViewById(R.id.list);
+//        ListView listView = (ListView) findViewById(R.id.list);
+
         // put ArrayAdapter inside the XML
-        listView.setAdapter(itemsAdapter);
+//        listView.setAdapter(itemsAdapter);
+
+        // get address of the GridView from the XML file
+        GridView gridView = (GridView) findViewById(R.id.gridview);
+
+        // link the gridView to the ArrayAdapter
+        gridView.setAdapter(itemsAdapter);
 
 
     } // onCreate
