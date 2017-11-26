@@ -3,22 +3,21 @@ package com.example.android.miwok;
 
 public class Word {
 
-    private String mDefaultTranslation;
+    // 2 private states(variables)
+    private String mDeafultTranslation;
     private String mMiwokTranslation;
 
     // constructor
-    public Word(String defaultTranslation, String miworkTranslation) {
-        mDefaultTranslation = defaultTranslation;
-        mMiwokTranslation = miworkTranslation;
+    public Word(String defaultTranslation, String miwokTranslation) {
+        mDeafultTranslation = defaultTranslation;
+        mMiwokTranslation = miwokTranslation;
     }
 
-    // get deafault translation of the word
-    public String getDefaultTranslation() {
-        return mDefaultTranslation;
+    public String getmDeafultTranslation() {
+        return mDeafultTranslation;
     }
 
-    // get Miwok translation of the word
-    public String getMiwokTranslation() {
+    public String getmMiwokTranslation() {
         return mMiwokTranslation;
     }
 
