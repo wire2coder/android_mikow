@@ -6,6 +6,7 @@ public class Word {
     // 2 private states(variables)
     private String mDeafultTranslation;
     private String mMiwokTranslation;
+    private int mImageResourceId;
 
     // constructor
     public Word(String defaultTranslation, String miwokTranslation) {
@@ -20,5 +21,7 @@ public class Word {
     public String getmMiwokTranslation() {
         return mMiwokTranslation;
     }
+
+    public int getmImageResourceId() { return mImageResourceId; }
 
 } // class
