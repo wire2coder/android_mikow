@@ -21,17 +21,16 @@ public class NumbersActivity extends AppCompatActivity {
         Word word1 = new Word("one", "lutti");
 
         // put word1 object into array words
-        alist1.add(word1);
-        alist1.add(new Word("two", "otiiko")) ;
-        alist1.add(new Word("three", "tolookosu"));
-        alist1.add(new Word("four", "oyyisa"));
-        alist1.add(new Word("five", "massokka"));
-        alist1.add(new Word("six", "temmokka"));
-        alist1.add(new Word("seven", "kenekaku"));
-        alist1.add(new Word("eight", "kawinta"));
-        alist1.add(new Word("nine", "wo’e"));
-        alist1.add(new Word("ten", "na’aacha"));
-
+        alist1.add(new Word("one", "onetik", R.drawable.number_one));
+        alist1.add(new Word("two", "otiiko", R.drawable.number_two));
+        alist1.add(new Word("three", "tolookosu", R.drawable.number_three));
+        alist1.add(new Word("four", "oyyisa", R.drawable.number_four));
+        alist1.add(new Word("five", "massokka", R.drawable.number_five));
+        alist1.add(new Word("six", "temmokka", R.drawable.number_six));
+        alist1.add(new Word("seven", "kenekaku", R.drawable.number_seven));
+        alist1.add(new Word("eight", "kawinta", R.drawable.number_eight));
+        alist1.add(new Word("nine", "wo’e", R.drawable.number_nine));
+        alist1.add(new Word("ten", "na’aacha", R.drawable.number_ten));
 
         // make ArrayAdapter <data type>
 //        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);

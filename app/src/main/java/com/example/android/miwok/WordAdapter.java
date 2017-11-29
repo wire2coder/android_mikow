@@ -2,10 +2,12 @@ package com.example.android.miwok;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,6 +43,15 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView default_text_view = (TextView) listItemView.findViewById(R.id.default_text_view);
         default_text_view.setText( currentWord.getmDeafultTranslation() );
 
+        if (currentWord.hasImage()) {
+            // Find the ImageView
+            ImageView iconView = (ImageView) listItemView.findViewById(R.id.image_view);
+            iconView.setImageResource( currentWord.getmImageResourceId() );
+        } else {
+            ImageView iconView = (ImageView) listItemView.findViewById(R.id.image_view);
+            // since GONE is a CLASS variable, so you access it by View.GONE
+            iconView.setVisibility(View.GONE);
+        }
 
         return listItemView;
     }
