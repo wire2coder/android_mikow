@@ -43,12 +43,18 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView default_text_view = (TextView) listItemView.findViewById(R.id.default_text_view);
         default_text_view.setText( currentWord.getmDeafultTranslation() );
 
+        // Find the ImageView
+        ImageView iconView = (ImageView) listItemView.findViewById(R.id.image_view);
+
         if (currentWord.hasImage()) {
-            // Find the ImageView
-            ImageView iconView = (ImageView) listItemView.findViewById(R.id.image_view);
+
+            // get the resource ID of the image
             iconView.setImageResource( currentWord.getmImageResourceId() );
+            // set the ImageView to be visible
+            iconView.setVisibility(View.VISIBLE);
+
         } else {
-            ImageView iconView = (ImageView) listItemView.findViewById(R.id.image_view);
+
             // since GONE is a CLASS variable, so you access it by View.GONE
             iconView.setVisibility(View.GONE);
         }
