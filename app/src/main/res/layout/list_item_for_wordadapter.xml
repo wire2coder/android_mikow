@@ -6,11 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+
+    android:minHeight="@dimen/list_item_height"
+    android:background="@color/tan_background"
     >
 
     <ImageView
-        android:layout_width="88dp"
-        android:layout_height="88dp"
+        android:layout_width="@dimen/list_item_width"
+        android:layout_height="@dimen/list_item_height"
         android:src="@mipmap/ic_launcher"
         android:id="@+id/image_view"
         android:background="#FFF7DA"
@@ -20,32 +23,33 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="88dp"
+        android:layout_height="@dimen/list_item_height"
         android:orientation="vertical"
         android:padding="16dp"
-
-        android:background="#FD8E09"
+        android:id="@+id/text_container"
         >
 
         <TextView
             android:id="@+id/miwok_text_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
             tools:text="lutti"
-
             android:paddingLeft="16dp"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textStyle="bold"
             />
 
         <TextView
             android:id="@+id/default_text_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="top"
             tools:text="one"
-
             android:paddingLeft="18sp"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             />
 
     </LinearLayout>

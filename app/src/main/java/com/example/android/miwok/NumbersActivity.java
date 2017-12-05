@@ -35,7 +35,7 @@ public class NumbersActivity extends AppCompatActivity {
         // make ArrayAdapter <data type>
 //        ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, words);
 //        ArrayAdapter<Word> itemsAdapter = new ArrayAdapter<Word>(this, R.layout.list_item_for_wordadapter, words);
-        WordAdapter adapter = new WordAdapter(this, alist1);
+        WordAdapter adapter = new WordAdapter(this, alist1, R.color.category_numbers);
 
         // make a new ArrayAdapter, (context, data source)
 //        WordAdapter adapter = new WordAdapter(this, words);
