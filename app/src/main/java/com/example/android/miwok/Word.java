@@ -10,6 +10,7 @@ public class Word {
     private String mDeafultTranslation;
     private String mMiwokTranslation;
     private int mImageResourceId = NO_IMAGE_PROVIDED;
+    private int mSoundResourceId;
 
     // constructor
     public Word(String defaultTranslation, String miwokTranslation) {
@@ -18,10 +19,18 @@ public class Word {
     }
 
     // constructor number 2
-    public Word(String defaultTranslation, String miwokTranslation, int resourceId) {
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId) {
         mDeafultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
-        mImageResourceId = resourceId;
+        mImageResourceId = imageResourceId;
+    }
+
+    // constructor number 3
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId, int soundResourceId) {
+        mDeafultTranslation = defaultTranslation;
+        mMiwokTranslation = miwokTranslation;
+        mImageResourceId = imageResourceId;
+        mSoundResourceId = soundResourceId;
     }
 
     public String getmDeafultTranslation() {
@@ -33,6 +42,8 @@ public class Word {
     }
 
     public int getmImageResourceId() { return mImageResourceId; }
+
+    public int getmSoundResourceId() { return mSoundResourceId; }
 
     public boolean hasImage() {
         return mImageResourceId != -1;
