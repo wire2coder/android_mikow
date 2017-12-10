@@ -7,34 +7,32 @@ public class Word {
     private static final int NO_IMAGE_PROVIDED = -1;
 
     // 2 private states(variables)
-    private String mDeafultTranslation;
+    private String mDefaultTranslation;
     private String mMiwokTranslation;
     private int mImageResourceId = NO_IMAGE_PROVIDED;
-    private int mSoundResourceId;
+    private int mAudioResourceId;
 
     // constructor
-    public Word(String defaultTranslation, String miwokTranslation) {
-        mDeafultTranslation = defaultTranslation;
+
+
+    public Word(String defaultTranslation, String miwokTranslation, int audioResourceId) {
+        mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
+        mAudioResourceId = audioResourceId;
     }
 
-    // constructor number 2
-    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId) {
-        mDeafultTranslation = defaultTranslation;
+    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId,
+                int audioResourceId) {
+        mDefaultTranslation = defaultTranslation;
         mMiwokTranslation = miwokTranslation;
         mImageResourceId = imageResourceId;
+        mAudioResourceId = audioResourceId;
     }
 
-    // constructor number 3
-    public Word(String defaultTranslation, String miwokTranslation, int imageResourceId, int soundResourceId) {
-        mDeafultTranslation = defaultTranslation;
-        mMiwokTranslation = miwokTranslation;
-        mImageResourceId = imageResourceId;
-        mSoundResourceId = soundResourceId;
-    }
+
 
     public String getmDeafultTranslation() {
-        return mDeafultTranslation;
+        return mDefaultTranslation;
     }
 
     public String getmMiwokTranslation() {
@@ -43,12 +41,20 @@ public class Word {
 
     public int getmImageResourceId() { return mImageResourceId; }
 
-    public int getmSoundResourceId() { return mSoundResourceId; }
+    public int getmSoundResourceId() { return mAudioResourceId; }
 
     public boolean hasImage() {
         return mImageResourceId != -1;
     }
 
-
+    @Override
+    public String toString() {
+        return "Word{" +
+                "mDefaultTranslation='" + mDefaultTranslation + '\'' +
+                ", mMiwokTranslation='" + mMiwokTranslation + '\'' +
+                ", mImageResourceId=" + mImageResourceId +
+                ", mAudioResourceId=" + mAudioResourceId +
+                '}';
+    }
 
 } // class
