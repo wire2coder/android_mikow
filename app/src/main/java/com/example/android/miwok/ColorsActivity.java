@@ -71,6 +71,16 @@ public class ColorsActivity extends AppCompatActivity {
 
     } // onCreate
 
+
+    // make the player stop playing when you navigate out of the program.
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        releaseMediaPlayer();
+    }
+
+
     /**
      * Clean up the media player by releasing its resources.
      */

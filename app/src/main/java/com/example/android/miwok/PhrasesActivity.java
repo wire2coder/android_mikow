@@ -64,6 +64,14 @@ public class PhrasesActivity extends AppCompatActivity {
             }
         });
 
+    } // onCreate
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        releaseMediaPlayer();
     }
 
     /**
