@@ -1,6 +1,8 @@
 package com.example.android.miwok;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,10 +12,28 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import static android.media.AudioManager.AUDIOFOCUS_GAIN;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
+import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
+
 public class FamilyActivity extends AppCompatActivity {
 
-    // global variables
+    /** Handles playback of all the sound files */
     private MediaPlayer mMediaPlayer;
+
+    /** Handles audio focus when playing a sound file */
+    private AudioManager mAudioManager;
+
+    /**
+     * This listener gets triggered when the {@link MediaPlayer} has completed
+     * playing the audio file.
+     */
+    MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +76,31 @@ public class FamilyActivity extends AppCompatActivity {
 
                 Word one_word = family_array.get(position);
 
+
+                /**
+                 * This listener gets triggered whenever the audio focus changes
+                 * (i.e., we gain or lose audio focus because of another app or device).
+                 *
+                 * so you need audio focus(control) to play the audio
+                 */
+
+                AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener =
+                        new  AudioManager.OnAudioFocusChangeListener() {
+                            @Override
+                            public void onAudioFocusChange(int focusChange) {
+                                // loss_transient or loss_transient_duck
+                                if ( focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ) {
+                                    HERE
+                                } else if ( focusChange == AudioManager.AUDIOFOCUS_LOSS ) {
+                                    HERE
+                                } else if ( focusChange == AudioManager.AUDIOFOCUS_GAIN ) {
+                                    HERE
+                                }
+                            }
+                        };
+
+
+
                 mMediaPlayer = MediaPlayer.create(FamilyActivity.this, one_word.getmSoundResourceId());
                 mMediaPlayer.start();
 
@@ -84,13 +129,17 @@ public class FamilyActivity extends AppCompatActivity {
      */
     private void releaseMediaPlayer() {
         if (mMediaPlayer != null) {
+
             // Regardless of the current state of the media player, release its resources
             // because we no longer need it.
             mMediaPlayer.release();
+
             // Set the media player back to null. For our code, we've decided that
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
+
+
         }
     }
 
