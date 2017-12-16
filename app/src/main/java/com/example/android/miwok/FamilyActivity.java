@@ -1,5 +1,6 @@
 package com.example.android.miwok;
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
@@ -35,11 +36,39 @@ public class FamilyActivity extends AppCompatActivity {
         }
     };
 
+    /**
+     * This listener gets triggered whenever the audio focus changes
+     * (i.e., we gain or lose audio focus because of another app or device).
+     */
+    AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener =
+            new AudioManager.OnAudioFocusChangeListener() {
+                @Override
+                public void onAudioFocusChange(int focusChange) {
+                    if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                        // pause audio
+                        mMediaPlayer.pause();
+                        // play audio from the beginning
+                        mMediaPlayer.seekTo(0);
+                    } else if ( focusChange == AudioManager.AUDIOFOCUS_GAIN ) {
+                        // resume playback
+                        mMediaPlayer.start();
+                    } else if ( focusChange == AudioManager.AUDIOFOCUS_LOSS ) {
+                        // lost audio control permanent
+                        // clean up the audio player object
+                        releaseMediaPlayer();
+
+                    }
+                }
+            };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.listview_for_all);
 
+        // get Android system service for audio focus
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         // 1. make collection
         final ArrayList<Word> family_array = new ArrayList<Word>();
@@ -70,48 +99,26 @@ public class FamilyActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
+                Word one_word = family_array.get(position);
+
                 // Release the media player if it currently exists because we are about to
                 // play a different sound file
                 releaseMediaPlayer();
 
-                Word one_word = family_array.get(position);
+                // Request audio focus so in order to play the audio file. The app needs to play a
+                // short audio file, so we will request audio focus with a short amount of time
+                // with AUDIOFOCUS_GAIN_TRANSIENT.
+                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT );
 
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    // got auido control
+                    mMediaPlayer = MediaPlayer.create(FamilyActivity.this, one_word.getmSoundResourceId() );
+                    mMediaPlayer.start();
 
-                /**
-                 * This listener gets triggered whenever the audio focus changes
-                 * (i.e., we gain or lose audio focus because of another app or device).
-                 *
-                 * so you need audio focus(control) to play the audio
-                 */
-
-                AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener =
-                        new  AudioManager.OnAudioFocusChangeListener() {
-                            @Override
-                            public void onAudioFocusChange(int focusChange) {
-                                // loss_transient or loss_transient_duck
-                                if ( focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ) {
-                                    HERE
-                                } else if ( focusChange == AudioManager.AUDIOFOCUS_LOSS ) {
-                                    HERE
-                                } else if ( focusChange == AudioManager.AUDIOFOCUS_GAIN ) {
-                                    HERE
-                                }
-                            }
-                        };
-
-
-
-                mMediaPlayer = MediaPlayer.create(FamilyActivity.this, one_word.getmSoundResourceId());
-                mMediaPlayer.start();
-
-                // setup a listener on the media player, so that we can stop and releae the
-                // media player once the sounds finished playing.
-                mMediaPlayer.setOnCompletionListener( new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        releaseMediaPlayer();
-                    }
-                });
+                    // setup a listener on the media player, so that we can stop and release
+                    // the media player once the sounds finished playing.
+                    mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                }
             }
         });
 
@@ -139,6 +146,8 @@ public class FamilyActivity extends AppCompatActivity {
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null;
 
+            // Abandon audio focus when playback is completed
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
 
         }
     }

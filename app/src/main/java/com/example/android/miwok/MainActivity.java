@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 //                Toast.makeText(view.getContext(), "Open the list of numbers", Toast.LENGTH_SHORT).show();
 
                 // create a new Intent
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class  );
+                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
                 startActivity(numbersIntent);
             }
         });
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Toast.makeText(view.getContext(), "Open list of words for color", Toast.LENGTH_SHORT).show();
 
-                    Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
-                    startActivity(colorsIntent);
+                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
+                startActivity(colorsIntent);
             }
         });
 

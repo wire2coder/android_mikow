@@ -32,7 +32,7 @@ public class NumbersActivity extends AppCompatActivity {
     /** Handles audio focus when playing a sound file */
     private AudioManager mAudioManager;
 
-    /**
+    /**+
      * This listener gets triggered when the {@link MediaPlayer} has completed
      * playing the audio file.
      */
@@ -75,7 +75,7 @@ public class NumbersActivity extends AppCompatActivity {
         // listview_for_all.xml
         setContentView(R.layout.listview_for_all);
 
-        // Create and setup the {@link AudioManager} to request audio focus
+        // Create and setup the AudioManager to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 //        ArrayList<String> words = new ArrayList<String>();
