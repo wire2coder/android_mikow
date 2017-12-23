@@ -3,7 +3,6 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,7 +48,7 @@ public class ColorsActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listview_for_all);
+        setContentView(R.layout.word_list);
 
         // get system service for audio manager
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -71,7 +70,7 @@ public class ColorsActivity extends AppCompatActivity {
         WordAdapter adapter1 = new WordAdapter(this, colorsArray, R.color.category_colors);
 
         // 4. something ListView
-        ListView listView = (ListView) findViewById(R.id.listview_for_all);
+        ListView listView = (ListView) findViewById(R.id.list);
 
         // 5. User WordAdapter.java in ListView
         listView.setAdapter(adapter1);
@@ -94,7 +93,7 @@ public class ColorsActivity extends AppCompatActivity {
                 if (result == AudioManager.AUDIOFOCUS_GAIN) {
 
                     // got audio focus
-                    mMediaPlayer = MediaPlayer.create(ColorsActivity.this, one_word.getmSoundResourceId());
+                    mMediaPlayer = MediaPlayer.create(ColorsActivity.this, one_word.getAudioResourceId());
                     mMediaPlayer.start();
 
                     // setup a listener on the media player, so that we can stop and releae the

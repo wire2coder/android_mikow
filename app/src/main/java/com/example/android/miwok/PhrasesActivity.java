@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -48,7 +47,7 @@ public class PhrasesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.listview_for_all);
+        setContentView(R.layout.word_list);
 
         // get audio service from Android
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -69,7 +68,7 @@ public class PhrasesActivity extends AppCompatActivity {
         WordAdapter adapter = new WordAdapter(this, phrases_array, R.color.category_phrases);
 
 
-        ListView listView = (ListView) findViewById(R.id.listview_for_all);
+        ListView listView = (ListView) findViewById(R.id.list);
 
         listView.setAdapter(adapter);
 
@@ -84,7 +83,7 @@ public class PhrasesActivity extends AppCompatActivity {
 
                 Word one_word = phrases_array.get(position);
 
-                mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, one_word.getmSoundResourceId());
+                mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, one_word.getAudioResourceId());
                 mMediaPlayer.start();
 
                 // setup a listener on the media player, so that we can stop and releae the

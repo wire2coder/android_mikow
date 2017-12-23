@@ -41,7 +41,7 @@ public class Word {
 
     public int getmImageResourceId() { return mImageResourceId; }
 
-    public int getmSoundResourceId() { return mAudioResourceId; }
+    public int getAudioResourceId() { return mAudioResourceId; }
 
     public boolean hasImage() {
         return mImageResourceId != -1;

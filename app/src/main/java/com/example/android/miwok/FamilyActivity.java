@@ -3,17 +3,14 @@ package com.example.android.miwok;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import static android.media.AudioManager.AUDIOFOCUS_GAIN;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
 
@@ -65,7 +62,7 @@ public class FamilyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.listview_for_all);
+        setContentView(R.layout.word_list);
 
         // get Android system service for audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
@@ -89,7 +86,7 @@ public class FamilyActivity extends AppCompatActivity {
         WordAdapter adapter1 = new WordAdapter(this, family_array, R.color.category_family);
 
         // 4. find the ListView
-        ListView listView = (ListView) findViewById(R.id.listview_for_all);
+        ListView listView = (ListView) findViewById(R.id.list);
 
         // 5. use ListView with ArrayAdapter
         listView.setAdapter(adapter1);
@@ -112,7 +109,7 @@ public class FamilyActivity extends AppCompatActivity {
 
                 if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
                     // got auido control
-                    mMediaPlayer = MediaPlayer.create(FamilyActivity.this, one_word.getmSoundResourceId() );
+                    mMediaPlayer = MediaPlayer.create(FamilyActivity.this, one_word.getAudioResourceId() );
                     mMediaPlayer.start();
 
                     // setup a listener on the media player, so that we can stop and release
